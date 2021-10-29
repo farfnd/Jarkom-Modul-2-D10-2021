@@ -354,7 +354,7 @@ Prefix IP untuk kelompok kami adalah `10.26`.
     ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903663477867040879/unknown.png)
 
 ## Soal 7
-> Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.e14.com dengan alias www.general.mecha.franky.e14.com yang mengarah ke Skypie
+> Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.yyy.com dengan alias www.general.mecha.franky.yyy.com yang mengarah ke Skypie
 
 ### Jawaban:
 1. Buka file `/etc/bind/sunnygo/mecha.franky.d10.com` pada **Water7**, lalu tambahkan subdomain untuk general.mecha.franky.d10.com yang mengarah ke IP Skypie.
