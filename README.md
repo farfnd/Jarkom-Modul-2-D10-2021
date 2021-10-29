@@ -280,14 +280,14 @@ Setelah itu terdapat subdomain mecha.franky.e14.com dengan alias www.mecha.frank
     mkdir /etc/bind/sunnygo
     ```
 11.  Kemudian, salin file `/etc/bind/db.local` ke folder yang baru dibuat dengan nama `mecha.franky.d10.com` menggunakan command
-   ```
-   cp /etc/bind/db.local /etc/bind/sunnygo/mecha.franky.d10.com
-   ```
+     ```
+     cp /etc/bind/db.local /etc/bind/sunnygo/mecha.franky.d10.com
+     ```
 12. Kemudian buka file tersebut dan ubah sehingga menjadi seperti gambar di bawah
-   ```
-   nano /etc/bind/sunnygo/mecha.franky.d10.com
-   ```
-   ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903662648166580244/unknown.png)
+    ```
+    nano /etc/bind/sunnygo/mecha.franky.d10.com
+    ```
+    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903662648166580244/unknown.png)
 13. Restart bind9 pada Water9
     ```
     service bind9 restart
