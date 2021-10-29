@@ -139,7 +139,7 @@ Prefix IP untuk kelompok kami adalah `10.26`.
      ```
 10. Terakhir, lakukan test ping ke `franky.d10.com` dan `www.franky.d10.com` pada client
    
-   ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903644454769025094/unknown.png)
+    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903644454769025094/unknown.png)
 
 ## Soal 3
 > Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yyy.com yang diatur DNS-nya di EniesLobby dan mengarah ke Skypie
@@ -173,6 +173,7 @@ Prefix IP untuk kelompok kami adalah `10.26`.
    file "/etc/bind/kaizoku/2.26.10.in-addr.arpa";
    };
    ```
+   
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903647975635574784/unknown.png)
    
 3. Kemudian, salin file `/etc/bind/db.local` ke folder yang baru dibuat dengan nama `2.26.10.in-addr.arpa` menggunakan command
@@ -183,6 +184,7 @@ Prefix IP untuk kelompok kami adalah `10.26`.
    ```
    nano /etc/bind/kaizoku/2.26.10.in-addr.arpa
    ```
+   
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903649514899005450/unknown.png)
    
 5. Kemudian, lakukan beberapa langkah-langkah berikut untuk checking
