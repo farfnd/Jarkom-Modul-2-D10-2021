@@ -1,4 +1,11 @@
-# Jarkom-Modul-2-D10-2021
+# Laporan Resmi Soal Shift Modul 2 Jarkom 2021
+
+## Anggota Kelompok
+- Mohammad Faderik I H (05111940000023)
+- Farhan Arifandi (05111940000061)
+- Yusril Zubaydi (05111940000160)
+
+
 ## Prefix IP
 Prefix IP untuk kelompok kami adalah `10.26`.
 
