@@ -360,6 +360,7 @@ Prefix IP untuk kelompok kami adalah `10.26`.
    service bind9 restart
    ```
 3. Test menggunakan ping ke `general.mecha.franky.d10.com` dan `www.general.mecha.franky.d10.com` pada client
+
    ![text alt](https://cdn.discordapp.com/attachments/848199470025801749/903665673564205126/unknown.png)
 
 ## Soal 8
@@ -389,6 +390,7 @@ www.super       IN      CNAME   super.franky.d10.com.
 ns1             IN      A       10.26.2.3
 mecha           IN      NS      ns1
 ```
+
 2. Restart bind9 dengan perintah `service bind9 restart`.
 
 **Skypie**
