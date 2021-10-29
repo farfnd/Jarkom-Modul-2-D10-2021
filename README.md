@@ -1,15 +1,17 @@
 # Jarkom-Modul-2-D10-2021
-# Prefix IP
-Prefix ip untuk kelompok kami adalah `10.26`
+## Prefix IP
+Prefix IP untuk kelompok kami adalah `10.26`.
 
-# Soal No. 1
-## Soal
-EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, dan Skypie akan digunakan sebagai Web Server. Terdapat 2 Client yaitu Loguetown, dan Alabasta. Semua node terhubung pada router Foosha, sehingga dapat mengakses internet
-![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903631674171072542/unknown.png)
-## Jawaban
-1. Buat susunan topologi seperti gambar diatas
+## Soal 1
+> EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, dan Skypie akan digunakan sebagai Web Server. Terdapat 2 Client yaitu Loguetown, dan Alabasta. Semua node terhubung pada router Foosha, sehingga dapat mengakses internet
+> 
+>  ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903631674171072542/unknown.png)
+
+### Jawaban:
+1. Buat susunan topologi seperti gambar di atas
 2. Kemudian setting network setiap node yang ada
-   * Foosha
+   - Foosha
+   
     ```
     auto eth0
     iface eth0 inet dhcp
@@ -24,7 +26,9 @@ EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, d
         address 10.26.2.1
         netmask 255.255.255.0
     ```
-    * Longuetown
+    
+    - Loguetown
+    
     ```
     auto eth0
     iface eth0 inet static
@@ -32,7 +36,9 @@ EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, d
         netmask 255.255.255.0
         gateway 10.26.1.1
     ```
-    * Alabasta
+    
+    - Alabasta
+    
     ```
     auto eth0
     iface eth0 inet static
@@ -40,7 +46,8 @@ EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, d
 	      netmask 255.255.255.0
 	      gateway 10.26.1.1
     ```
-    * EniesLobby
+    
+    - EniesLobby
     ```
     auto eth0
     iface eth0 inet static
@@ -48,7 +55,9 @@ EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, d
 	      netmask 255.255.255.0
 	      gateway 10.26.2.1
     ```
-    * Water7
+    
+    - Water7
+    
     ```
     auto eth0
     iface eth0 inet static
@@ -56,7 +65,9 @@ EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, d
 	      netmask 255.255.255.0
 	      gateway 10.26.2.1
     ```
-    * Skypie
+    
+    - Skypie
+    
     ```
     auto eth0
     iface eth0 inet static
@@ -67,18 +78,19 @@ EniesLobby akan dijadikan sebagai DNS Master, Water7 akan dijadikan DNS Slave, d
 3. Restart semua node
 4. Kemudian, jalankan command `iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE -s 10.26.0.0/16` pada Foosha
 5. Lalu, jalankan echo `nameserver 192.168.122.1 > /etc/resolv.conf` pada semua node yang ada
-6. Terakhir, tes menggunakan ping google pada client, di sini clientnya adalah Alabasta dan Longuetown
-   * LogueTown
-
+6. Terakhir, tes menggunakan ping google pada client, di sini clientnya adalah Alabasta dan Loguetown
+   - Loguetown
+   
     ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903637158210990120/unknown.png)
-   * Alabasta
+    
+   - Alabasta
 
     ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903638006940962867/unknown.png)
     
-# Soal No. 2
-## Soal
-Luffy ingin menghubungi Franky yang berada di EniesLobby dengan denden mushi. Kalian diminta Luffy untuk membuat website utama dengan mengakses franky.e14.com dengan alias www.franky.d10.com pada folder kaizoku.
-## Jawaban
+## Soal 2
+> Luffy ingin menghubungi Franky yang berada di EniesLobby dengan denden mushi. Kalian diminta Luffy untuk membuat website utama dengan mengakses **franky.yyy.com** dengan alias www.franky.yyy.com pada folder kaizoku.
+
+### Jawaban:
 1. Lakukan update pada node EniesLobby dengan command
     ```
     apt-get update
@@ -121,13 +133,13 @@ Luffy ingin menghubungi Franky yang berada di EniesLobby dengan denden mushi. Ka
      #nameserver 192.168.122.1
      nameserver 10.26.2.2
      ```
-11. Terakhir, lakukan test ping ke `franky.d10.com` dan `www.franky.d10.com` pada client
+10. Terakhir, lakukan test ping ke `franky.d10.com` dan `www.franky.d10.com` pada client
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903644454769025094/unknown.png)
 
-# Soal No. 3
-## Soal
-Setelah itu buat subdomain super.franky.d10.com dengan alias www.super.franky.d10.com yang diatur DNS nya di EniesLobby dan mengarah ke Skypie
-## Jawaban
+## Soal 3
+> Setelah itu buat subdomain super.franky.yyy.com dengan alias www.super.franky.yyy.com yang diatur DNS-nya di EniesLobby dan mengarah ke Skypie
+
+**Jawaban:**
 1. Ubah file `/etc/bind/kaizoku/franky.d10.com` dengan menambahkan subdomain yang mengarah ke **IP Skypie**
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903645954220109834/Screenshot_2021-10-24_202139.png)
 2. Restart bind9 dengan command
@@ -137,10 +149,10 @@ Setelah itu buat subdomain super.franky.d10.com dengan alias www.super.franky.d1
 3. Lakukan test ping ke `super.franky.d10.com` dan `www.super.franky.d10.com` pada client
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903646793408069652/unknown.png)
 
-# Soal No. 4
-## Soal
-Buat juga reverse domain untuk domain utama
-## Jawaban
+## Soal 4
+> Buat juga reverse domain untuk domain utama
+
+### Jawaban:
 1. Buka `/etc/bind/named.conf.local` pada EniesLobby dengan command
    ```
    nano /etc/bind/named.conf.local
@@ -153,6 +165,7 @@ Buat juga reverse domain untuk domain utama
    };
    ```
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903647975635574784/unknown.png)
+   
 3. Kemudian, salin file `/etc/bind/db.local` ke folder yang baru dibuat dengan nama `2.26.10.in-addr.arpa` menggunakan command
    ```
    cp /etc/bind/db.local /etc/bind/kaizoku/2.26.10.in-addr.arpa
@@ -162,6 +175,7 @@ Buat juga reverse domain untuk domain utama
    nano /etc/bind/kaizoku/2.26.10.in-addr.arpa
    ```
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903649514899005450/unknown.png)
+   
 5. Kemudian, lakukan beberapa langkah-langkah berikut untuk checking
    * Ubah nameserver kembali ke Foosha agar bisa mengakses internet
      ```
@@ -185,10 +199,11 @@ Buat juga reverse domain untuk domain utama
    * Hasilnya sebagai berikut
 
      ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903651456022880286/unknown.png)
-# Soal No. 5
-## Soal
-Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Water7 sebagai DNS Slave untuk domain utama
-## Jawaban
+
+## Soal 5
+> Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Water7 sebagai DNS Slave untuk domain utama
+
+### Jawaban:
 1. Buka `/etc/bind/named.conf.local` pada EniesLobby dengan command
    ```
    nano /etc/bind/named.conf.local
@@ -219,7 +234,7 @@ Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Wat
    ```
 6. Kemudian tambahkan beberapa line berikut pada file yang sudah dibuka tedi
    ```
-   zone "franky.e14.com" {
+   zone "franky.d10.com" {
       type slave;
       masters { 10.26.2.2; };
       file "/var/lib/bind/franky.d10.com";
@@ -235,36 +250,43 @@ Supaya tetap bisa menghubungi Franky jika server EniesLobby rusak, maka buat Wat
      ```
      service bind9 stop
      ```
+     
    * Buka konsol pada client dan tambahkan nameserver Water7 pada `/etc/resolv.conf`
      ```
      #nameserver 192.168.122.1
      nameserver 10.26.2.2
      nameserver 10.26.2.3
      ```
+     
    * Lakukan ping ke `franky.d10.com`
+   
      ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903658144935342130/unknown.png)
-# Soal No. 6
-## Soal
-Setelah itu terdapat subdomain mecha.franky.e14.com dengan alias www.mecha.franky.e14.com yang didelegasikan dari EniesLobby ke Water7 dengan IP menuju ke Skypie dalam folder sunnygo
-## Jawaban
+
+## Soal 6
+> Setelah itu terdapat subdomain mecha.franky.yyy.com dengan alias www.mecha.franky.yyy.com yang didelegasikan dari EniesLobby ke Water7 dengan IP menuju ke Skypie dalam folder sunnygo
+
+### Jawaban:
 1. Buka file /etc/bind/kaizoku/franky.d10.com pada EniesLobby dengan command
    ```
    nano /etc/bind/kaizoku/franky.d10.com
    ```
 2. Ubah hingga menjadi seperti gambar di bawah
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903659655551655996/unknown.png)
+   
 3. Kemudian buka file `/etc/bind/named.conf.options` dengan command
    ```
    nano /etc/bind/named.conf.options
    ```
 4. Ubah sehingga seperti gambar di bawah
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903660201025110046/unknown.png)
+   
 5. Lalu buka `/etc/bind/named.conf.local` dengan command
    ```
     nano /etc/bind/named.conf.local
    ```
 6. Kemudian ubah seperti gambar di bawah ini
-   ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903660817105449010/unknown.png)
+   ![image](https://user-images.githubusercontent.com/70105993/139464084-dad42aba-2a99-4b14-8c99-5445026d6828.png)
+   
 7. Restart bind9 dengan command
    ```
    service bind9 restart
@@ -273,31 +295,36 @@ Setelah itu terdapat subdomain mecha.franky.e14.com dengan alias www.mecha.frank
    ```
    nano /etc/bind/named.conf.options
    ```
+   
 9. Ubah sehingga seperti gambar di bawah ini
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903661359697379418/unknown.png)
+   
 10. Buat direktori dengan nama `sunnygo` pada **Water7** dengan ccommand
     ```
     mkdir /etc/bind/sunnygo
     ```
 11.  Kemudian, salin file `/etc/bind/db.local` ke folder yang baru dibuat dengan nama `mecha.franky.d10.com` menggunakan command
-     ```
-     cp /etc/bind/db.local /etc/bind/sunnygo/mecha.franky.d10.com
-     ```
+   ```
+   cp /etc/bind/db.local /etc/bind/sunnygo/mecha.franky.d10.com
+   ```
 12. Kemudian buka file tersebut dan ubah sehingga menjadi seperti gambar di bawah
-    ```
-    nano /etc/bind/sunnygo/mecha.franky.d10.com
-    ```
-    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903662648166580244/unknown.png)
+   ```
+   nano /etc/bind/sunnygo/mecha.franky.d10.com
+   ```
+   ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903662648166580244/unknown.png)
+   
 13. Restart bind9 pada Water9
     ```
     service bind9 restart
     ```
+    
 14. Lakukan ping ke `mecha.franky.d10.com` dan `www.mecha.franky.d10.com` pada client
     ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903663477867040879/unknown.png)
-# Soal No.7
-## Soal
-Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.e14.com dengan alias www.general.mecha.franky.e14.com yang mengarah ke Skypie
-## Jawaban
+
+## Soal 7
+> Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Water7 dengan nama general.mecha.franky.e14.com dengan alias www.general.mecha.franky.e14.com yang mengarah ke Skypie
+
+### Jawaban:
 1. Buka file `/etc/bind/sunnygo/mecha.franky.d10.com` pada **Water7**, lalu tambahkan subdomain untuk general.mecha.franky.d10.com yang mengarah ke IP Skypie.
    ```
    nano /etc/bind/sunnygo/mecha.franky.d10.com
@@ -309,3 +336,122 @@ Untuk memperlancar komunikasi Luffy dan rekannya, dibuatkan subdomain melalui Wa
    ```
 3. Test menggunakan ping ke `general.mecha.franky.d10.com` dan `www.general.mecha.franky.d10.com` pada client
    ![text alt](https://cdn.discordapp.com/attachments/848199470025801749/903665673564205126/unknown.png)
+
+## Soal 8
+> Setelah melakukan konfigurasi server, maka dilakukan konfigurasi Webserver. Pertama dengan webserver www.franky.yyy.com. Pertama, luffy membutuhkan webserver dengan DocumentRoot pada /var/www/franky.yyy.com.
+
+### Jawaban:
+**EniesLobby**
+- Edit file **/etc/bind/kaizoku/franky.d10.com** seperti berikut
+
+```vim
+;
+; BIND data file for local loopback interface
+;
+$TTL    604800
+@       IN      SOA     franky.d10.com. root.franky.d10.com. (
+                                4       ; Serial
+                         604800         ; Refresh
+                          86400         ; Retry
+                        2419200         ; Expire
+                         604800 )       ; Negative Cache TTL
+;
+@               IN      NS      franky.d10.com.
+@               IN      A       10.26.2.4
+www             IN      CNAME   franky.d10.com.
+super           IN      A       10.26.2.4
+www.super       IN      CNAME   super.franky.d10.com.
+ns1             IN      A       10.26.2.3
+mecha           IN      NS      ns1
+```
+- Restart bind9 dengan perintah `service bind9 restart`.
+
+**Skypie**
+- Update library yang sudah terinstall, lalu install Apache dan librarynya, lalu install php dan menjalankan service Apache yang telah ter-install dengan perintah berikut.
+```bash
+apt-get install apache2 -y
+apt-get install php -y
+apt-get install libapache2-mod-php7.0 -y
+
+service apache2 start
+```
+- Buat folder **/var/www/franky.d10.com** dengan perintah `mkdir /var/www/franky.d10.com`.
+- Install **wget** dan **unzip** dengan perintah:
+```bash
+apt-get install wget -y
+apt-get install unzip -y
+```
+- Download file zip yang diperlukan untuk web dengan perintah
+```bash
+wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/franky.zip
+```
+- Unzip file yang sudah didownload dengan perintah
+```bash
+unzip -j franky.zip -d /var/www/franky.d10.com
+```
+- Buat file baru pada direktori **/etc/apache2/sites-available** dengan nama **franky.d10.com.conf** dan isi sebagai berikut
+```vim
+<VirtualHost *:80>
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        ServerName franky.d10.com
+        ServerAlias www.franky.d10.com
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/franky.d10.com
+
+        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+        # error, crit, alert, emerg.
+
+        # It is also possible to configure the loglevel for particular
+        # modules, e.g.
+        #LogLevel info ssl:warn
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        # For most configuration files from conf-available/, which are
+        # enabled or disabled at a global level, it is possible to
+        # include a line for only one particular virtual host. For example the
+        # following line enables the CGI configuration for this host only
+        # after it has been globally disabled with "a2disconf".
+        #Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+```
+- Jalankan konfigurasi webserver yang telah dibuat dengan perintah `a2ensite franky.d10.com` lalu restart service Apache dengan perintah `service apache2 restart`.
+
+**Loguetown**
+- Install Lynx dengan command `apt-get install lynx -y`
+- Akses www.franky.d10.com dengan command `lynx www.franky.d10.com`
+![image](https://user-images.githubusercontent.com/70105993/139464873-9cf38926-1a1b-45c9-b0c9-b7782e1c452d.png)
+
+## Soal 9
+> Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home.
+
+
+
+## Soal 10
+> Setelah itu, pada subdomain `www.super.franky.yyy.com`, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada **/var/www/super.franky.yyy.com**.
+
+
+
+## Soal 11
+> Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja.
+
+
+
+## Soal 12
+> Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache.
+
+
+
+## Soal 13
+> Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset `www.super.franky.yyy.com/public/js` menjadi `www.super.franky.yyy.com/js`.
+
