@@ -370,88 +370,85 @@ Prefix IP untuk kelompok kami adalah `10.26`.
 **EniesLobby**
 1. Edit file **/etc/bind/kaizoku/franky.d10.com** seperti berikut
 
-```vim
-;
-; BIND data file for local loopback interface
-;
-$TTL    604800
-@       IN      SOA     franky.d10.com. root.franky.d10.com. (
-                                4       ; Serial
-                         604800         ; Refresh
-                          86400         ; Retry
-                        2419200         ; Expire
-                         604800 )       ; Negative Cache TTL
-;
-@               IN      NS      franky.d10.com.
-@               IN      A       10.26.2.4
-www             IN      CNAME   franky.d10.com.
-super           IN      A       10.26.2.4
-www.super       IN      CNAME   super.franky.d10.com.
-ns1             IN      A       10.26.2.3
-mecha           IN      NS      ns1
-```
+	```vim
+	;
+	; BIND data file for local loopback interface
+	;
+	$TTL    604800
+	@       IN      SOA     franky.d10.com. root.franky.d10.com. (
+					4       ; Serial
+				 604800         ; Refresh
+				  86400         ; Retry
+				2419200         ; Expire
+				 604800 )       ; Negative Cache TTL
+	;
+	@               IN      NS      franky.d10.com.
+	@               IN      A       10.26.2.4
+	www             IN      CNAME   franky.d10.com.
+	super           IN      A       10.26.2.4
+	www.super       IN      CNAME   super.franky.d10.com.
+	ns1             IN      A       10.26.2.3
+	mecha           IN      NS      ns1
+	```
 
 2. Restart bind9 dengan perintah `service bind9 restart`.
 
 **Skypie**
 1. Update library yang sudah terinstall, lalu install Apache dan librarynya, lalu install php dan menjalankan service Apache yang telah ter-install dengan perintah berikut.
-```bash
-apt-get install apache2 -y
-apt-get install php -y
-apt-get install libapache2-mod-php7.0 -y
+	```bash
+	apt-get install apache2 -y
+	apt-get install php -y
+	apt-get install libapache2-mod-php7.0 -y
 
-service apache2 start
-```
+	service apache2 start
+	```
 2. Buat folder **/var/www/franky.d10.com** dengan perintah `mkdir /var/www/franky.d10.com`.
 3. Install **wget** dan **unzip** dengan perintah:
-```bash
-apt-get install wget -y
-apt-get install unzip -y
-```
+	```bash
+	apt-get install wget -y
+	apt-get install unzip -y
+	```
 4. Download file zip yang diperlukan untuk web dengan perintah
-```bash
-wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/franky.zip
-```
-5. Unzip file yang sudah didownload dengan perintah
-```bash
-unzip -j franky.zip -d /var/www/franky.d10.com
-```
+	```bash
+	wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/franky.zip
+	```
+5. Unzip file yang sudah didownload dengan perintah `unzip -j franky.zip -d /var/www/franky.d10.com`
 6. Buat file baru pada direktori **/etc/apache2/sites-available** dengan nama **franky.d10.com.conf** dan isi sebagai berikut
-```vim
-<VirtualHost *:80>
-        # The ServerName directive sets the request scheme, hostname and port that
-        # the server uses to identify itself. This is used when creating
-        # redirection URLs. In the context of virtual hosts, the ServerName
-        # specifies what hostname must appear in the request's Host: header to
-        # match this virtual host. For the default virtual host (this file) this
-        # value is not decisive as it is used as a last resort host regardless.
-        # However, you must set it for any further virtual host explicitly.
-        ServerName franky.d10.com
-        ServerAlias www.franky.d10.com
+	```vim
+	<VirtualHost *:80>
+		# The ServerName directive sets the request scheme, hostname and port that
+		# the server uses to identify itself. This is used when creating
+		# redirection URLs. In the context of virtual hosts, the ServerName
+		# specifies what hostname must appear in the request's Host: header to
+		# match this virtual host. For the default virtual host (this file) this
+		# value is not decisive as it is used as a last resort host regardless.
+		# However, you must set it for any further virtual host explicitly.
+		ServerName franky.d10.com
+		ServerAlias www.franky.d10.com
 
-        ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/franky.d10.com
+		ServerAdmin webmaster@localhost
+		DocumentRoot /var/www/franky.d10.com
 
-        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
-        # error, crit, alert, emerg.
+		# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+		# error, crit, alert, emerg.
 
-        # It is also possible to configure the loglevel for particular
-        # modules, e.g.
-        #LogLevel info ssl:warn
+		# It is also possible to configure the loglevel for particular
+		# modules, e.g.
+		#LogLevel info ssl:warn
 
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-        # For most configuration files from conf-available/, which are
-        # enabled or disabled at a global level, it is possible to
-        # include a line for only one particular virtual host. For example the
-        # following line enables the CGI configuration for this host only
-        # after it has been globally disabled with "a2disconf".
-        #Include conf-available/serve-cgi-bin.conf
-</VirtualHost>
+		# For most configuration files from conf-available/, which are
+		# enabled or disabled at a global level, it is possible to
+		# include a line for only one particular virtual host. For example the
+		# following line enables the CGI configuration for this host only
+		# after it has been globally disabled with "a2disconf".
+		#Include conf-available/serve-cgi-bin.conf
+	</VirtualHost>
 
-# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
-```
+	# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+	```
 7. Jalankan konfigurasi webserver yang telah dibuat dengan perintah `a2ensite franky.d10.com` lalu restart service Apache dengan perintah `service apache2 restart`.
 
 **Loguetown**
@@ -468,50 +465,50 @@ unzip -j franky.zip -d /var/www/franky.d10.com
 1. Aktifkan modul rewrite pada Apache dengan perintah `a2enmod rewrite`.
 2. Restart service Apache dengan perintah `service apache2 restart`.
 3. Edit file **.htaccess** pada folder **/var/www/franky.d10.com** sebagai berikut
-```
-RewriteEngine On
-RewriteBase /
-RewriteCond %{HTTP_HOST} ^10\.26\.2\.4$
-RewriteRule ^(.*)$ http://www.franky.d10.com/$1 [L,R=301]
-```
+	```
+	RewriteEngine On
+	RewriteBase /
+	RewriteCond %{HTTP_HOST} ^10\.26\.2\.4$
+	RewriteRule ^(.*)$ http://www.franky.d10.com/$1 [L,R=301]
+	```
 4. Edit file **franky.d10.com.conf** pada folder **/etc/apache2/sites-available** sebagai berikut
-```vim
-<VirtualHost *:80>
-        # The ServerName directive sets the request scheme, hostname and port that
-        # the server uses to identify itself. This is used when creating
-        # redirection URLs. In the context of virtual hosts, the ServerName
-        # specifies what hostname must appear in the request's Host: header to
-        # match this virtual host. For the default virtual host (this file) this
-        # value is not decisive as it is used as a last resort host regardless.
-        # However, you must set it for any further virtual host explicitly.
-        ServerName franky.d10.com
-        ServerAlias www.franky.d10.com
+	```vim
+	<VirtualHost *:80>
+		# The ServerName directive sets the request scheme, hostname and port that
+		# the server uses to identify itself. This is used when creating
+		# redirection URLs. In the context of virtual hosts, the ServerName
+		# specifies what hostname must appear in the request's Host: header to
+		# match this virtual host. For the default virtual host (this file) this
+		# value is not decisive as it is used as a last resort host regardless.
+		# However, you must set it for any further virtual host explicitly.
+		ServerName franky.d10.com
+		ServerAlias www.franky.d10.com
 
-        ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/franky.d10.com
+		ServerAdmin webmaster@localhost
+		DocumentRoot /var/www/franky.d10.com
 
-        Alias "/home" "/var/www/franky.d10.com/index.php/home"
+		Alias "/home" "/var/www/franky.d10.com/index.php/home"
 
-        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
-        # error, crit, alert, emerg.
+		# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+		# error, crit, alert, emerg.
 
-        # It is also possible to configure the loglevel for particular
-        # modules, e.g.
-        #LogLevel info ssl:warn
+		# It is also possible to configure the loglevel for particular
+		# modules, e.g.
+		#LogLevel info ssl:warn
 
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-        # For most configuration files from conf-available/, which are
-        # enabled or disabled at a global level, it is possible to
-        # include a line for only one particular virtual host. For example the
-        # following line enables the CGI configuration for this host only
-        # after it has been globally disabled with "a2disconf".
-        #Include conf-available/serve-cgi-bin.conf
-</VirtualHost>
+		# For most configuration files from conf-available/, which are
+		# enabled or disabled at a global level, it is possible to
+		# include a line for only one particular virtual host. For example the
+		# following line enables the CGI configuration for this host only
+		# after it has been globally disabled with "a2disconf".
+		#Include conf-available/serve-cgi-bin.conf
+	</VirtualHost>
 
-# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
-```
+	# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+	```
 5. Restart service Apache dengan perintah `service apache2 restart`.
 
 **Loguetown**
@@ -527,48 +524,48 @@ Cek dengan mengakses www.franky.d10.com/index.php/home dengan command `lynx www.
 **Skypie**
 1. Buat folder document root untuk subdomain **super.franky.d10.com** dengan command `mkdir /var/www/super.franky.d10.com`.
 2. Download file yang diperlukan, lalu unzip pada folder document root subdomain dengan command
-```
-wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/super.franky.zip
-unzip -j super.franky.zip -d /var/www/super.franky.d10.com
-```
+	```
+	wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/super.franky.zip
+	unzip -j super.franky.zip -d /var/www/super.franky.d10.com
+	```
 3. Salin file **000-default.conf** sebagai template file konfigurasi subdomain **super.franky.d10.com** dengan command 
-```bash
-cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/super.franky.d10.com.conf
-```
+	```bash
+	cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/super.franky.d10.com.conf
+	```
 4. Edit file **super.franky.d10.com** sebagai berikut
-```vim
-<VirtualHost *:80>
-        # The ServerName directive sets the request scheme, hostname and port that
-        # the server uses to identify itself. This is used when creating
-        # redirection URLs. In the context of virtual hosts, the ServerName
-        # specifies what hostname must appear in the request's Host: header to
-        # match this virtual host. For the default virtual host (this file) this
-        # value is not decisive as it is used as a last resort host regardless.
-        # However, you must set it for any further virtual host explicitly.
-        ServerName super.franky.d10.com
-        ServerAlias www.super.franky.d10.com
+	```vim
+	<VirtualHost *:80>
+		# The ServerName directive sets the request scheme, hostname and port that
+		# the server uses to identify itself. This is used when creating
+		# redirection URLs. In the context of virtual hosts, the ServerName
+		# specifies what hostname must appear in the request's Host: header to
+		# match this virtual host. For the default virtual host (this file) this
+		# value is not decisive as it is used as a last resort host regardless.
+		# However, you must set it for any further virtual host explicitly.
+		ServerName super.franky.d10.com
+		ServerAlias www.super.franky.d10.com
 
-        ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/super.franky.d10.com
+		ServerAdmin webmaster@localhost
+		DocumentRoot /var/www/super.franky.d10.com
 
-        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
-        # error, crit, alert, emerg.
+		# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+		# error, crit, alert, emerg.
 
-        # It is also possible to configure the loglevel for particular
-        # modules, e.g.
-        #LogLevel info ssl:warn
+		# It is also possible to configure the loglevel for particular
+		# modules, e.g.
+		#LogLevel info ssl:warn
 
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-        # For most configuration files from conf-available/, which are
-        # enabled or disabled at a global level, it is possible to
-        # include a line for only one particular virtual host. For example the
-        # following line enables the CGI configuration for this host only
-        # after it has been globally disabled with "a2disconf".
-        #Include conf-available/serve-cgi-bin.conf
-</VirtualHost>
-```
+		# For most configuration files from conf-available/, which are
+		# enabled or disabled at a global level, it is possible to
+		# include a line for only one particular virtual host. For example the
+		# following line enables the CGI configuration for this host only
+		# after it has been globally disabled with "a2disconf".
+		#Include conf-available/serve-cgi-bin.conf
+	</VirtualHost>
+	```
 5. Aktifkan konfigurasi subdomain **super.franky.d10.com** dengan command `a2ensite super.franky.d10.com`.
 6. Restart service Apache dengan perintah `service apache2 restart`.
 
@@ -585,31 +582,31 @@ Cek subdomain yang sudah dibuat menggunakan lynx dengan command `lynx super.fran
 ### Jawaban:
 **Skypie**
 1. Tambahkan beberapa baris pada file **/etc/apache2/sites-available/super.franky.d10.com.conf** sebagai berikut
-```vim
-<VirtualHost *:80>
-        # The ServerName directive sets the request scheme, hostname and port that
-        # the server uses to identify itself. This is used when creating
-        # redirection URLs. In the context of virtual hosts, the ServerName
-        # specifies what hostname must appear in the request's Host: header to
-        # match this virtual host. For the default virtual host (this file) this
-        # value is not decisive as it is used as a last resort host regardless.
-        # However, you must set it for any further virtual host explicitly.
-        ServerName super.franky.d10.com
-        ServerAlias www.super.franky.d10.com
+	```vim
+	<VirtualHost *:80>
+		# The ServerName directive sets the request scheme, hostname and port that
+		# the server uses to identify itself. This is used when creating
+		# redirection URLs. In the context of virtual hosts, the ServerName
+		# specifies what hostname must appear in the request's Host: header to
+		# match this virtual host. For the default virtual host (this file) this
+		# value is not decisive as it is used as a last resort host regardless.
+		# However, you must set it for any further virtual host explicitly.
+		ServerName super.franky.d10.com
+		ServerAlias www.super.franky.d10.com
 
-        ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/super.franky.d10.com
+		ServerAdmin webmaster@localhost
+		DocumentRoot /var/www/super.franky.d10.com
 
-        <Directory /var/www/super.franky.d10.com>
-                Options +Indexes
-        </Directory>
+		<Directory /var/www/super.franky.d10.com>
+			Options +Indexes
+		</Directory>
 
-        <Directory /var/www/super.franky.d10.com/public>
-                Options +Indexes
-        </Directory>
+		<Directory /var/www/super.franky.d10.com/public>
+			Options +Indexes
+		</Directory>
 
-        ...
-```
+		...
+	```
 2. Restart service Apache dengan perintah `service apache2 restart`.
 
 **Loguetown**
@@ -625,22 +622,22 @@ Akses super.franky.d10.com/public menggunakan lynx dengan command `lynx super.fr
 ### Jawaban:
 **Skypie**
 1. Tambahkan baris pada file **/etc/apache2/sites-available/super.franky.d10.com.conf** untuk mengatur error page 404 sebagai berikut
-```vim
-	...
-	
-	ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
+	```vim
+		...
 
-        ErrorDocument 404 /error/404.html
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-        # For most configuration files from conf-available/, which are
-        # enabled or disabled at a global level, it is possible to
-        # include a line for only one particular virtual host. For example the
-        # following line enables the CGI configuration for this host only
-        # after it has been globally disabled with "a2disconf".
-        #Include conf-available/serve-cgi-bin.conf
-</VirtualHost>
-```
+		ErrorDocument 404 /error/404.html
+
+		# For most configuration files from conf-available/, which are
+		# enabled or disabled at a global level, it is possible to
+		# include a line for only one particular virtual host. For example the
+		# following line enables the CGI configuration for this host only
+		# after it has been globally disabled with "a2disconf".
+		#Include conf-available/serve-cgi-bin.conf
+	</VirtualHost>
+	```
 2. Restart service Apache dengan perintah `service apache2 restart`.
 
 **Loguetown**
@@ -655,32 +652,32 @@ Coba tampilkan halaman 404 dengan memasukkan sembarang path setelah super.franky
 ### Jawaban:
 **Skypie**
 1. Tambahkan baris pada file **/etc/apache2/sites-available/super.franky.d10.com.conf** untuk alias path `/js` ke `/public/js` sebagai berikut
-```vim
-<VirtualHost *:80>
-        # The ServerName directive sets the request scheme, hostname and port that
-        # the server uses to identify itself. This is used when creating
-        # redirection URLs. In the context of virtual hosts, the ServerName
-        # specifies what hostname must appear in the request's Host: header to
-        # match this virtual host. For the default virtual host (this file) this
-        # value is not decisive as it is used as a last resort host regardless.
-        # However, you must set it for any further virtual host explicitly.
-        ServerName super.franky.d10.com
-        ServerAlias www.super.franky.d10.com
+	```vim
+	<VirtualHost *:80>
+		# The ServerName directive sets the request scheme, hostname and port that
+		# the server uses to identify itself. This is used when creating
+		# redirection URLs. In the context of virtual hosts, the ServerName
+		# specifies what hostname must appear in the request's Host: header to
+		# match this virtual host. For the default virtual host (this file) this
+		# value is not decisive as it is used as a last resort host regardless.
+		# However, you must set it for any further virtual host explicitly.
+		ServerName super.franky.d10.com
+		ServerAlias www.super.franky.d10.com
 
-        ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/super.franky.d10.com
+		ServerAdmin webmaster@localhost
+		DocumentRoot /var/www/super.franky.d10.com
 
-        <Directory /var/www/super.franky.d10.com>
-                Options +Indexes
-        </Directory>
+		<Directory /var/www/super.franky.d10.com>
+			Options +Indexes
+		</Directory>
 
-        <Directory /var/www/super.franky.d10.com/public>
-                Options +Indexes
-        </Directory>
+		<Directory /var/www/super.franky.d10.com/public>
+			Options +Indexes
+		</Directory>
 
-        Alias "/js" "/var/www/super.franky.d10.com/public/js"
-	...
-```
+		Alias "/js" "/var/www/super.franky.d10.com/public/js"
+		...
+	```
 2. Restart service Apache dengan perintah `service apache2 restart`.
 
 **Loguetown**
