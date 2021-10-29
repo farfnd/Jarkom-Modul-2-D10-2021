@@ -539,7 +539,7 @@ Cek dengan mengakses www.franky.d10.com/index.php/home dengan command `lynx www.
 	```bash
 	cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/super.franky.d10.com.conf
 	```
-4. Edit file **super.franky.d10.com** sebagai berikut
+4. Edit file **super.franky.d10.com.conf** sebagai berikut
 	```vim
 	<VirtualHost *:80>
 		# The ServerName directive sets the request scheme, hostname and port that
