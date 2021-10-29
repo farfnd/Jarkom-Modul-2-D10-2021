@@ -110,7 +110,9 @@ Prefix IP untuk kelompok kami adalah `10.26`.
       file "/etc/bind/kaizoku/franky.d10.com";
    };
    ```
+   
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903640749118226452/unknown.png)
+   
 5. Buat folder `kaizoku` pada `/etc/bind` dengan command
    ```
    mkdir /etc/bind/kaizoku
@@ -123,7 +125,9 @@ Prefix IP untuk kelompok kami adalah `10.26`.
    ```
    nano /etc/bind/kaizoku/franky.d10.com
    ```
+   
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903642601939411024/Screenshot_2021-10-24_200257.png)
+   
 8. Lalu, restart bind9 dengan command
    ```
    service bind9 restart
@@ -134,6 +138,7 @@ Prefix IP untuk kelompok kami adalah `10.26`.
      nameserver 10.26.2.2
      ```
 10. Terakhir, lakukan test ping ke `franky.d10.com` dan `www.franky.d10.com` pada client
+   
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903644454769025094/unknown.png)
 
 ## Soal 3
@@ -141,12 +146,16 @@ Prefix IP untuk kelompok kami adalah `10.26`.
 
 **Jawaban:**
 1. Ubah file `/etc/bind/kaizoku/franky.d10.com` dengan menambahkan subdomain yang mengarah ke **IP Skypie**
+   
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903645954220109834/Screenshot_2021-10-24_202139.png)
+   
 2. Restart bind9 dengan command
    ```
    service bind9 restart
    ```
+   
 3. Lakukan test ping ke `super.franky.d10.com` dan `www.super.franky.d10.com` pada client
+   
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903646793408069652/unknown.png)
 
 ## Soal 4
@@ -218,7 +227,9 @@ Prefix IP untuk kelompok kami adalah `10.26`.
       file "/etc/bind/kaizoku/franky.d10.com";
    };
    ```
+   
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903653208117895178/unknown.png)
+   
 3. Restart bind9 dengan command
    ```
    service bind9 restart
@@ -240,7 +251,9 @@ Prefix IP untuk kelompok kami adalah `10.26`.
       file "/var/lib/bind/franky.d10.com";
    };
    ```
+   
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903654572562718781/unknown.png)
+   
 7. Restart bind9 dengan command
    ```
    service bind9 restart
@@ -270,7 +283,9 @@ Prefix IP untuk kelompok kami adalah `10.26`.
    ```
    nano /etc/bind/kaizoku/franky.d10.com
    ```
+   
 2. Ubah hingga menjadi seperti gambar di bawah
+   
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903659655551655996/unknown.png)
    
 3. Kemudian buka file `/etc/bind/named.conf.options` dengan command
@@ -278,13 +293,16 @@ Prefix IP untuk kelompok kami adalah `10.26`.
    nano /etc/bind/named.conf.options
    ```
 4. Ubah sehingga seperti gambar di bawah
+   
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903660201025110046/unknown.png)
    
 5. Lalu buka `/etc/bind/named.conf.local` dengan command
    ```
     nano /etc/bind/named.conf.local
    ```
+   
 6. Kemudian ubah seperti gambar di bawah ini
+   
    ![image](https://user-images.githubusercontent.com/70105993/139464084-dad42aba-2a99-4b14-8c99-5445026d6828.png)
    
 7. Restart bind9 dengan command
@@ -297,21 +315,25 @@ Prefix IP untuk kelompok kami adalah `10.26`.
    ```
    
 9. Ubah sehingga seperti gambar di bawah ini
+   
    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903661359697379418/unknown.png)
    
 10. Buat direktori dengan nama `sunnygo` pada **Water7** dengan ccommand
     ```
     mkdir /etc/bind/sunnygo
     ```
+    
 11.  Kemudian, salin file `/etc/bind/db.local` ke folder yang baru dibuat dengan nama `mecha.franky.d10.com` menggunakan command
-   ```
-   cp /etc/bind/db.local /etc/bind/sunnygo/mecha.franky.d10.com
-   ```
+    ```
+    cp /etc/bind/db.local /etc/bind/sunnygo/mecha.franky.d10.com
+    ```
+    
 12. Kemudian buka file tersebut dan ubah sehingga menjadi seperti gambar di bawah
-   ```
-   nano /etc/bind/sunnygo/mecha.franky.d10.com
-   ```
-   ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903662648166580244/unknown.png)
+    ```
+    nano /etc/bind/sunnygo/mecha.franky.d10.com
+    ```
+   
+    ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903662648166580244/unknown.png)
    
 13. Restart bind9 pada Water9
     ```
@@ -319,6 +341,7 @@ Prefix IP untuk kelompok kami adalah `10.26`.
     ```
     
 14. Lakukan ping ke `mecha.franky.d10.com` dan `www.mecha.franky.d10.com` pada client
+    
     ![alt text](https://cdn.discordapp.com/attachments/848199470025801749/903663477867040879/unknown.png)
 
 ## Soal 7
@@ -342,7 +365,7 @@ Prefix IP untuk kelompok kami adalah `10.26`.
 
 ### Jawaban:
 **EniesLobby**
-- Edit file **/etc/bind/kaizoku/franky.d10.com** seperti berikut
+1. Edit file **/etc/bind/kaizoku/franky.d10.com** seperti berikut
 
 ```vim
 ;
@@ -364,10 +387,10 @@ www.super       IN      CNAME   super.franky.d10.com.
 ns1             IN      A       10.26.2.3
 mecha           IN      NS      ns1
 ```
-- Restart bind9 dengan perintah `service bind9 restart`.
+2. Restart bind9 dengan perintah `service bind9 restart`.
 
 **Skypie**
-- Update library yang sudah terinstall, lalu install Apache dan librarynya, lalu install php dan menjalankan service Apache yang telah ter-install dengan perintah berikut.
+1. Update library yang sudah terinstall, lalu install Apache dan librarynya, lalu install php dan menjalankan service Apache yang telah ter-install dengan perintah berikut.
 ```bash
 apt-get install apache2 -y
 apt-get install php -y
@@ -375,21 +398,21 @@ apt-get install libapache2-mod-php7.0 -y
 
 service apache2 start
 ```
-- Buat folder **/var/www/franky.d10.com** dengan perintah `mkdir /var/www/franky.d10.com`.
-- Install **wget** dan **unzip** dengan perintah:
+2. Buat folder **/var/www/franky.d10.com** dengan perintah `mkdir /var/www/franky.d10.com`.
+3. Install **wget** dan **unzip** dengan perintah:
 ```bash
 apt-get install wget -y
 apt-get install unzip -y
 ```
-- Download file zip yang diperlukan untuk web dengan perintah
+4. Download file zip yang diperlukan untuk web dengan perintah
 ```bash
 wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/franky.zip
 ```
-- Unzip file yang sudah didownload dengan perintah
+5. Unzip file yang sudah didownload dengan perintah
 ```bash
 unzip -j franky.zip -d /var/www/franky.d10.com
 ```
-- Buat file baru pada direktori **/etc/apache2/sites-available** dengan nama **franky.d10.com.conf** dan isi sebagai berikut
+6. Buat file baru pada direktori **/etc/apache2/sites-available** dengan nama **franky.d10.com.conf** dan isi sebagai berikut
 ```vim
 <VirtualHost *:80>
         # The ServerName directive sets the request scheme, hostname and port that
@@ -425,33 +448,239 @@ unzip -j franky.zip -d /var/www/franky.d10.com
 
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
 ```
-- Jalankan konfigurasi webserver yang telah dibuat dengan perintah `a2ensite franky.d10.com` lalu restart service Apache dengan perintah `service apache2 restart`.
+7. Jalankan konfigurasi webserver yang telah dibuat dengan perintah `a2ensite franky.d10.com` lalu restart service Apache dengan perintah `service apache2 restart`.
 
 **Loguetown**
-- Install Lynx dengan command `apt-get install lynx -y`
-- Akses www.franky.d10.com dengan command `lynx www.franky.d10.com`
+1. Install Lynx dengan command `apt-get install lynx -y`
+2. Akses www.franky.d10.com dengan command `lynx www.franky.d10.com`
+
 ![image](https://user-images.githubusercontent.com/70105993/139464873-9cf38926-1a1b-45c9-b0c9-b7782e1c452d.png)
 
 ## Soal 9
 > Setelah itu, Luffy juga membutuhkan agar url www.franky.yyy.com/index.php/home dapat menjadi menjadi www.franky.yyy.com/home.
 
+### Jawaban:
+**Skypie**
+1. Aktifkan modul rewrite pada Apache dengan perintah `a2enmod rewrite`.
+2. Restart service Apache dengan perintah `service apache2 restart`.
+3. Edit file **.htaccess** pada folder **/var/www/franky.d10.com** sebagai berikut
+```
+RewriteEngine On
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^10\.26\.2\.4$
+RewriteRule ^(.*)$ http://www.franky.d10.com/$1 [L,R=301]
+```
+4. Edit file **franky.d10.com.conf** pada folder **/etc/apache2/sites-available** sebagai berikut
+```vim
+<VirtualHost *:80>
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        ServerName franky.d10.com
+        ServerAlias www.franky.d10.com
 
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/franky.d10.com
+
+        Alias "/home" "/var/www/franky.d10.com/index.php/home"
+
+        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+        # error, crit, alert, emerg.
+
+        # It is also possible to configure the loglevel for particular
+        # modules, e.g.
+        #LogLevel info ssl:warn
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        # For most configuration files from conf-available/, which are
+        # enabled or disabled at a global level, it is possible to
+        # include a line for only one particular virtual host. For example the
+        # following line enables the CGI configuration for this host only
+        # after it has been globally disabled with "a2disconf".
+        #Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+```
+5. Restart service Apache dengan perintah `service apache2 restart`.
+
+**Loguetown**
+
+Cek dengan mengakses www.franky.d10.com/index.php/home dengan command `lynx www.franky.d10.com/index.php/home` maupun www.franky.d10.com/home dengan command `lynx www.franky.d10.com/home`, akan ditampilkan halaman yang sama.
+
+![image](https://user-images.githubusercontent.com/70105993/139464873-9cf38926-1a1b-45c9-b0c9-b7782e1c452d.png)
 
 ## Soal 10
 > Setelah itu, pada subdomain `www.super.franky.yyy.com`, Luffy membutuhkan penyimpanan aset yang memiliki DocumentRoot pada **/var/www/super.franky.yyy.com**.
 
+### Jawaban:
+**Skypie**
+1. Buat folder document root untuk subdomain **super.franky.d10.com** dengan command `mkdir /var/www/super.franky.d10.com`.
+2. Download file yang diperlukan, lalu unzip pada folder document root subdomain dengan command
+```
+wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/super.franky.zip
+unzip -j super.franky.zip -d /var/www/super.franky.d10.com
+```
+3. Salin file **000-default.conf** sebagai template file konfigurasi subdomain **super.franky.d10.com** dengan command 
+```bash
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/super.franky.d10.com.conf
+```
+4. Edit file **super.franky.d10.com** sebagai berikut
+```vim
+<VirtualHost *:80>
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        ServerName super.franky.d10.com
+        ServerAlias www.super.franky.d10.com
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/super.franky.d10.com
+
+        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+        # error, crit, alert, emerg.
+
+        # It is also possible to configure the loglevel for particular
+        # modules, e.g.
+        #LogLevel info ssl:warn
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        # For most configuration files from conf-available/, which are
+        # enabled or disabled at a global level, it is possible to
+        # include a line for only one particular virtual host. For example the
+        # following line enables the CGI configuration for this host only
+        # after it has been globally disabled with "a2disconf".
+        #Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+```
+5. Aktifkan konfigurasi subdomain **super.franky.d10.com** dengan command `a2ensite super.franky.d10.com`.
+6. Restart service Apache dengan perintah `service apache2 restart`.
+
+**Loguetown**
+
+Cek subdomain yang sudah dibuat menggunakan lynx dengan command `lynx super.franky.d10.com`
+
+![image](https://user-images.githubusercontent.com/70105993/139468221-c6e21810-2ddb-42e8-99ff-1088734370d9.png)
 
 
 ## Soal 11
 > Akan tetapi, pada folder /public, Luffy ingin hanya dapat melakukan directory listing saja.
 
+### Jawaban:
+**Skypie**
+1. Tambahkan beberapa baris pada file **/etc/apache2/sites-available/super.franky.d10.com.conf** sebagai berikut
+```vim
+<VirtualHost *:80>
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        ServerName super.franky.d10.com
+        ServerAlias www.super.franky.d10.com
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/super.franky.d10.com
+
+        <Directory /var/www/super.franky.d10.com>
+                Options +Indexes
+        </Directory>
+
+        <Directory /var/www/super.franky.d10.com/public>
+                Options +Indexes
+        </Directory>
+
+        ...
+```
+2. Restart service Apache dengan perintah `service apache2 restart`.
+
+**Loguetown**
+
+Akses super.franky.d10.com/public menggunakan lynx dengan command `lynx super.franky.d10.com/public`
+
+![image](https://user-images.githubusercontent.com/70105993/139469558-814dedcc-ebae-46f2-b9e6-3f28f51ee08d.png)
 
 
 ## Soal 12
 > Tidak hanya itu, Luffy juga menyiapkan error file 404.html pada folder /error untuk mengganti error kode pada apache.
 
+### Jawaban:
+**Skypie**
+1. Tambahkan baris pada file **/etc/apache2/sites-available/super.franky.d10.com.conf** untuk mengatur error page 404 sebagai berikut
+```vim
+	...
+	
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
 
+        ErrorDocument 404 /error/404.html
+
+        # For most configuration files from conf-available/, which are
+        # enabled or disabled at a global level, it is possible to
+        # include a line for only one particular virtual host. For example the
+        # following line enables the CGI configuration for this host only
+        # after it has been globally disabled with "a2disconf".
+        #Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+```
+2. Restart service Apache dengan perintah `service apache2 restart`.
+
+**Loguetown**
+
+Coba tampilkan halaman 404 dengan memasukkan sembarang path setelah super.franky.d10.com/, contohnya super.franky.d10.com/asdfg menggunakan lynx dengan command `lynx super.franky.d10.com/asdfg`
+
+![image](https://user-images.githubusercontent.com/70105993/139470382-b847e513-1fab-4c99-906e-31018a81f4f5.png)
 
 ## Soal 13
 > Luffy juga meminta Nami untuk dibuatkan konfigurasi virtual host. Virtual host ini bertujuan untuk dapat mengakses file asset `www.super.franky.yyy.com/public/js` menjadi `www.super.franky.yyy.com/js`.
 
+### Jawaban:
+**Skypie**
+1. Tambahkan baris pada file **/etc/apache2/sites-available/super.franky.d10.com.conf** untuk alias path `/js` ke `/public/js` sebagai berikut
+```vim
+<VirtualHost *:80>
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+        ServerName super.franky.d10.com
+        ServerAlias www.super.franky.d10.com
+
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/super.franky.d10.com
+
+        <Directory /var/www/super.franky.d10.com>
+                Options +Indexes
+        </Directory>
+
+        <Directory /var/www/super.franky.d10.com/public>
+                Options +Indexes
+        </Directory>
+
+        Alias "/js" "/var/www/super.franky.d10.com/public/js"
+	...
+```
+2. Restart service Apache dengan perintah `service apache2 restart`.
+
+**Loguetown**
+
+Cek dengan mengakses www.franky.d10.com/js dengan command `lynx www.franky.d10.com/js` maupun www.franky.d10.com/public/js dengan command `lynx www.franky.d10.com/public/js`, akan ditampilkan halaman yang sama.
+
+![image](https://user-images.githubusercontent.com/70105993/139470809-41f7893c-1d14-40b9-bc9f-ed2bbfcdddb9.png)
