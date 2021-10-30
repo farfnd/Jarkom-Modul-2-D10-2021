@@ -701,40 +701,40 @@ Cek dengan mengakses www.franky.d10.com/js dengan command `lynx www.franky.d10.c
 1. Buat folder document root untuk subdomain **general.mecha.franky.d10.com** dengan command `mkdir /var/www/general.mecha.franky.d10.com`.
 2. Download file yang diperlukan, lalu unzip pada folder document root subdomain dengan command
  
-
- wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/general.mecha.franky.zip
- unzip -j general.mecha.franky.zip -d /var/www/general.mecha.franky.d10.com
- 
+	```
+	wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/general.mecha.franky.zip
+	unzip -j general.mecha.franky.zip -d /var/www/general.mecha.franky.d10.com
+	```
 
 3. Salin file **000-default.conf** sebagai template file konfigurasi subdomain **general.mecha.franky.d10.com** untuk masing-masing port 15000 dan 15500 dengan command 
  
-bash
- cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/general.mecha.franky.d10.com-15000.conf
- cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/general.mecha.franky.d10.com-15500.conf
- 
+	```bash
+	cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/general.mecha.franky.d10.com-15000.conf
+	cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/general.mecha.franky.d10.com-15500.conf
+	``` 
 
 4. Edit file **general.mecha.franky.d10.com-15000.conf** sebagai berikut
  
-vim
- <VirtualHost *:15000>
-  ServerName general.mecha.franky.d10.com
-  ServerAlias www.general.mecha.franky.d10.com
+	```vim
+	<VirtualHost *:15000>
+	ServerName general.mecha.franky.d10.com
+	ServerAlias www.general.mecha.franky.d10.com
 
-  ServerAdmin webmaster@localhost
-  DocumentRoot /var/www/general.mecha.franky.d10.com
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/general.mecha.franky.d10.com
 
-  ErrorLog ${APACHE_LOG_DIR}/error.log
-  CustomLog ${APACHE_LOG_DIR}/access.log combined
- </VirtualHost>
- 
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+	</VirtualHost>
+	```
 
 5. Lakukan pula hal yang sama pada file **general.mecha.franky.d10.com-15500.conf**, hanya saja port pada baris paling atas diganti 15500.
 6. Aktifkan konfigurasi subdomain **general.mecha.franky.d10.com** pada port 15000 dan 15500 dengan command
  
-
- a2ensite general.mecha.franky.d10.com-15000
- a2ensite general.mecha.franky.d10.com-15500
- 
+	```
+	a2ensite general.mecha.franky.d10.com-15000
+	a2ensite general.mecha.franky.d10.com-15500
+	```
 
 7. Restart service Apache dengan perintah `service apache2 restart`.
 
@@ -752,19 +752,19 @@ Cek subdomain yang sudah dibuat pada port 15000 dan 15500 menggunakan lynx denga
 1. Buat file **.htpasswd** pada folder **/etc/apache2** untuk menyimpan informasi autentikasi dengan command `htpasswd -cb /etc/apache2/.htpasswd luffy onepiece`.
 2. Tambahkan beberapa baris pada file **general.mecha.franky.d10.com-15000.conf** dan **general.mecha.franky.d10.com-15500.conf** sebagai berikut
  
-vim
-  ...
-  ErrorLog ${APACHE_LOG_DIR}/error.log
-  CustomLog ${APACHE_LOG_DIR}/access.log combined
+	```vim
+		...
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
 
-  <Directory "var/www/general.mecha.franky.d10.com">
-   AuthType Basic
-   AuthName "Restricted Content"
-   AuthUserFile /etc/apache2/.htpasswd
-   Require valid-user
-  </Directory>
- </VirtualHost>
- 
+		<Directory "var/www/general.mecha.franky.d10.com">
+			AuthType Basic
+			AuthName "Restricted Content"
+			AuthUserFile /etc/apache2/.htpasswd
+			Require valid-user
+		</Directory>
+	</VirtualHost>
+	``` 
 
 3. Restart service Apache dengan perintah `service apache2 restart`.
 
@@ -790,25 +790,25 @@ Setelah memasukkan username dan password yang benar, maka akan muncul halaman be
 ### Jawaban:
 **Skypie**
 1. Edit file **/var/www/franky.d10.com/.htaccess** sebagai berikut untuk mengalihkan akses dari IP Skypie (10.26.2.4) ke www.franky.d10.com.
- 
-vim
- RewriteEngine On
- RewriteBase /
- RewriteCond %{HTTP_HOST} ^10\.26\.2\.4$
- RewriteRule ^(.*)$ http://www.franky.d10.com/$1 [L,R=301]
- 
+
+	```vim
+	RewriteEngine On
+	RewriteBase /
+	RewriteCond %{HTTP_HOST} ^10\.26\.2\.4$
+	RewriteRule ^(.*)$ http://www.franky.d10.com/$1 [L,R=301]
+	```
 
 2. Edit file **/etc/apache2/sites-available/000-default.conf** sebagai berikut.
  
-vim
- <VirtualHost *:80>
-  ServerAdmin webmaster@localhost
-  DocumentRoot "/var/www/franky.d10.com"
+	```vim
+	<VirtualHost *:80>
+		ServerAdmin webmaster@localhost
+		DocumentRoot "/var/www/franky.d10.com"
 
-  ErrorLog ${APACHE_LOG_DIR}/error.log
-  CustomLog ${APACHE_LOG_DIR}/access.log combined
- </VirtualHost>
- 
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
+	</VirtualHost>
+	```
 
 3. Restart service Apache dengan perintah `service apache2 restart`.
 
@@ -826,29 +826,29 @@ Akses IP Skypie menggunakan lynx dengan command lynx 10.26.2.4 , akan ditampilka
 **Skypie**
 1. Edit file **/var/www/super.franky.d10.com/.htaccess** sebagai berikut untuk mengalihkan akses dari URL yang pathnya mengandung substring 'franky' ke super.franky.d10.com/public/images/franky.png.
  
-vim
- RewriteEngine On
- RewriteBase /
- RewriteCond %{REQUEST_URI} !\bfranky.png\b
- RewriteRule franky http://super.franky.d10.com/public/images/franky.png$1 [L,R=301]
- 
+	```vim
+	RewriteEngine On
+	RewriteBase /
+	RewriteCond %{REQUEST_URI} !\bfranky.png\b
+	RewriteRule franky http://super.franky.d10.com/public/images/franky.png$1 [L,R=301]
+	```
 
 2. Edit file **/etc/apache2/sites-available/super.franky.d10.com.conf** sebagai berikut.
  
-vim
- <VirtualHost *:80>
-  ServerName super.franky.d10.com
-  ServerAlias www.super.franky.d10.com
+	```vim
+	 <VirtualHost *:80>
+		ServerName super.franky.d10.com
+		ServerAlias www.super.franky.d10.com
 
-  ServerAdmin webmaster@localhost
-  DocumentRoot /var/www/super.franky.d10.com
+		ServerAdmin webmaster@localhost
+		DocumentRoot /var/www/super.franky.d10.com
 
-  <Directory /var/www/super.franky.d10.com>
-   Options +Indexes
-   AllowOverride All
-  </Directory>
-  ...
- 
+		<Directory /var/www/super.franky.d10.com>
+			   Options +Indexes
+			   AllowOverride All
+		</Directory>
+	  	...
+	``` 
 
 3. Restart service Apache dengan perintah `service apache2 restart`.
 
