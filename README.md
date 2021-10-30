@@ -692,3 +692,168 @@ Coba tampilkan halaman 404 dengan memasukkan sembarang path setelah super.franky
 Cek dengan mengakses www.franky.d10.com/js dengan command `lynx www.franky.d10.com/js` maupun www.franky.d10.com/public/js dengan command `lynx www.franky.d10.com/public/js`, akan ditampilkan halaman yang sama.
 
 ![image](https://user-images.githubusercontent.com/70105993/139470809-41f7893c-1d14-40b9-bc9f-ed2bbfcdddb9.png)
+
+## Soal 14
+> Dan Luffy meminta untuk web www.general.mecha.franky.yyy.com hanya bisa diakses dengan port 15000 dan port 15500
+
+### Jawaban:
+**Skypie**
+1. Buat folder document root untuk subdomain **general.mecha.franky.d10.com** dengan command `mkdir /var/www/general.mecha.franky.d10.com`.
+2. Download file yang diperlukan, lalu unzip pada folder document root subdomain dengan command
+ 
+
+ wget https://raw.githubusercontent.com/FeinardSlim/Praktikum-Modul-2-Jarkom/main/general.mecha.franky.zip
+ unzip -j general.mecha.franky.zip -d /var/www/general.mecha.franky.d10.com
+ 
+
+3. Salin file **000-default.conf** sebagai template file konfigurasi subdomain **general.mecha.franky.d10.com** untuk masing-masing port 15000 dan 15500 dengan command 
+ 
+bash
+ cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/general.mecha.franky.d10.com-15000.conf
+ cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/general.mecha.franky.d10.com-15500.conf
+ 
+
+4. Edit file **general.mecha.franky.d10.com-15000.conf** sebagai berikut
+ 
+vim
+ <VirtualHost *:15000>
+  ServerName general.mecha.franky.d10.com
+  ServerAlias www.general.mecha.franky.d10.com
+
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/general.mecha.franky.d10.com
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+ </VirtualHost>
+ 
+
+5. Lakukan pula hal yang sama pada file **general.mecha.franky.d10.com-15500.conf**, hanya saja port pada baris paling atas diganti 15500.
+6. Aktifkan konfigurasi subdomain **general.mecha.franky.d10.com** pada port 15000 dan 15500 dengan command
+ 
+
+ a2ensite general.mecha.franky.d10.com-15000
+ a2ensite general.mecha.franky.d10.com-15500
+ 
+
+7. Restart service Apache dengan perintah `service apache2 restart`.
+
+**Loguetown**
+
+Cek subdomain yang sudah dibuat pada port 15000 dan 15500 menggunakan lynx dengan command lynx general.mecha.franky.d10.com:15000 dan `lynx general.mecha.franky.d10.com:15500`, akan ditampilkan halaman yang sama
+
+![image](https://user-images.githubusercontent.com/70105993/139472896-a58b2420-3896-43f5-b1b5-f7b8c9a8418d.png)
+
+## Soal 15
+> dengan autentikasi username luffy dan password onepiece dan file di /var/www/general.mecha.franky.yyy
+
+### Jawaban:
+**Skypie**
+1. Buat file **.htpasswd** pada folder **/etc/apache2** untuk menyimpan informasi autentikasi dengan command `htpasswd -cb /etc/apache2/.htpasswd luffy onepiece`.
+2. Tambahkan beberapa baris pada file **general.mecha.franky.d10.com-15000.conf** dan **general.mecha.franky.d10.com-15500.conf** sebagai berikut
+ 
+vim
+  ...
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+  <Directory "var/www/general.mecha.franky.d10.com">
+   AuthType Basic
+   AuthName "Restricted Content"
+   AuthUserFile /etc/apache2/.htpasswd
+   Require valid-user
+  </Directory>
+ </VirtualHost>
+ 
+
+3. Restart service Apache dengan perintah `service apache2 restart`.
+
+**Loguetown**
+
+Cek general.mecha.franky.d10.com pada port 15000 dan 15500 menggunakan lynx dengan command lynx general.mecha.franky.d10.com:15000 dan `lynx general.mecha.franky.d10.com:15500`, akan ditampilkan pesan berikut.
+
+![image](https://user-images.githubusercontent.com/70105993/139474069-5084f24f-496c-4c0e-b427-2f9cf9c6432b.png)
+
+Tunggu sejenak, maka akan tampil halaman untuk memasukkan username dan password.
+
+![image](https://user-images.githubusercontent.com/70105993/139473127-bd809dca-f861-4b74-aa64-00b6327526fb.png)
+![image](https://user-images.githubusercontent.com/70105993/139473189-176e1bb6-604f-4f61-9577-fa5ba752ab9c.png)
+
+Setelah memasukkan username dan password yang benar, maka akan muncul halaman berikut.
+
+![image](https://user-images.githubusercontent.com/70105993/139472896-a58b2420-3896-43f5-b1b5-f7b8c9a8418d.png)
+
+
+## Soal 16
+> Dan setiap kali mengakses IP Skypie akan dialihkan secara otomatis ke www.franky.yyy.com
+
+### Jawaban:
+**Skypie**
+1. Edit file **/var/www/franky.d10.com/.htaccess** sebagai berikut untuk mengalihkan akses dari IP Skypie (10.26.2.4) ke www.franky.d10.com.
+ 
+vim
+ RewriteEngine On
+ RewriteBase /
+ RewriteCond %{HTTP_HOST} ^10\.26\.2\.4$
+ RewriteRule ^(.*)$ http://www.franky.d10.com/$1 [L,R=301]
+ 
+
+2. Edit file **/etc/apache2/sites-available/000-default.conf** sebagai berikut.
+ 
+vim
+ <VirtualHost *:80>
+  ServerAdmin webmaster@localhost
+  DocumentRoot "/var/www/franky.d10.com"
+
+  ErrorLog ${APACHE_LOG_DIR}/error.log
+  CustomLog ${APACHE_LOG_DIR}/access.log combined
+ </VirtualHost>
+ 
+
+3. Restart service Apache dengan perintah `service apache2 restart`.
+
+**Loguetown**
+
+Akses IP Skypie menggunakan lynx dengan command lynx 10.26.2.4 , akan ditampilkan halaman home dari franky.d10.com.
+
+![image](https://user-images.githubusercontent.com/70105993/139475098-49074d47-3dde-407b-a19e-e19e4b18dcee.png)
+
+
+## Soal 17
+> Dikarenakan Franky juga ingin mengajak temannya untuk dapat menghubunginya melalui website www.super.franky.yyy.com, dan dikarenakan pengunjung web server pasti akan bingung dengan randomnya images yang ada, maka Franky juga meminta untuk mengganti request gambar yang memiliki substring “franky” akan diarahkan menuju franky.png.
+
+### Jawaban:
+**Skypie**
+1. Edit file **/var/www/super.franky.d10.com/.htaccess** sebagai berikut untuk mengalihkan akses dari URL yang pathnya mengandung substring 'franky' ke super.franky.d10.com/public/images/franky.png.
+ 
+vim
+ RewriteEngine On
+ RewriteBase /
+ RewriteCond %{REQUEST_URI} !\bfranky.png\b
+ RewriteRule franky http://super.franky.d10.com/public/images/franky.png$1 [L,R=301]
+ 
+
+2. Edit file **/etc/apache2/sites-available/super.franky.d10.com.conf** sebagai berikut.
+ 
+vim
+ <VirtualHost *:80>
+  ServerName super.franky.d10.com
+  ServerAlias www.super.franky.d10.com
+
+  ServerAdmin webmaster@localhost
+  DocumentRoot /var/www/super.franky.d10.com
+
+  <Directory /var/www/super.franky.d10.com>
+   Options +Indexes
+   AllowOverride All
+  </Directory>
+  ...
+ 
+
+3. Restart service Apache dengan perintah `service apache2 restart`.
+
+**Loguetown**
+
+Cek dengan memasukkan sembarang path yang mengandung substring 'franky' setelah super.franky.d10.com/, contohnya super.franky.d10.com/franky1234 menggunakan lynx dengan command `lynx super.franky.d10.com/franky1234`, maka akan diarahkan ke super.franky.d10.com/public/images/franky.png.
+
+![image](https://user-images.githubusercontent.com/70105993/139475929-9dfd7257-3eaa-40bb-aadb-e5bf3915d267.png)
