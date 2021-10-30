@@ -1,6 +1,6 @@
 # Laporan Resmi Soal Shift Modul 2 Jarkom 2021
 
-## Anggota Kelompok
+## Anggota Kelompok D10
 - Mohammad Faderik I H (05111940000023)
 - Farhan Arifandi (05111940000061)
 - Yusril Zubaydi (05111940000160)
