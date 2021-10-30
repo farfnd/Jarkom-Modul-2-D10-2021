@@ -857,3 +857,6 @@ Akses IP Skypie menggunakan lynx dengan command lynx 10.26.2.4 , akan ditampilka
 Cek dengan memasukkan sembarang path yang mengandung substring 'franky' setelah super.franky.d10.com/, contohnya super.franky.d10.com/franky1234 menggunakan lynx dengan command `lynx super.franky.d10.com/franky1234`, maka akan diarahkan ke super.franky.d10.com/public/images/franky.png.
 
 ![image](https://user-images.githubusercontent.com/70105993/139475929-9dfd7257-3eaa-40bb-aadb-e5bf3915d267.png)
+
+## Kendala selama pengerjaan
+Sempat muncul error ketika melakukan ping ke subdomain yang sudah dibuat dikarenakan kesalahan konfigurasi, dan error ketika mengaktifkan subdomain karena folder document root belum dibuat.
